@@ -1,0 +1,27 @@
+# Runs all plays to setup the box
+---
+- hosts: localhost
+  gather_facts: false
+  vars_files:
+    - {{ vars_file }}
+
+  tasks:
+    - name: Install apps with homebrew
+      homebrew: name={{ '{{ item }}' }} state=present update_homebrew=yes
+      with_items: tasks.homebrew.formulas
+      when: tasks.homebrew is defined
+
+    - name: Install python packages with pip
+      pip: name={{ '{{ item }}' }} state=latest
+      with_items: tasks.pip.packages
+
+    - name: Install ruby packages with gem
+      gem: name={{ '{{ item }}' }} state=latest
+      with_items: tasks.gem.packages
+
+    - name: Setup dotfiles from github
+      git: repo=git@github.com:{{ '{{ tasks.dotfiles.repo }}' }}.git dest=~/.dotfiles force=no update=no
+
+    - name: Symlink dotfiles
+      file: path=~/{{ '{{ item }}' }} src=~/.dotfiles/{{ '{{ item }}' }} state=link
+      with_items: tasks.dotfiles.list
