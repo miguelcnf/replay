@@ -4,10 +4,6 @@ from subprocess import check_call
 class replay:
   ''' replay wrapper '''
 
-  def __init__(self):
-    ''' initiates the replay module '''
-    pass
-
   def run(self, playbook_file, inventory_file):
     ''' hacky syscall to run ansible-playbook '''
 
