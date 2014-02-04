@@ -4,7 +4,7 @@ Replay is an hacky way to automate the installation/updates of your dev environm
 
 It happens to use ansible-playbook magic under the hood - in fact this is pretty much a nasty hack wrapping over ansible-playbook.
 
-Note that this is a hack and it's heavilly untested, I mean, until now it was only executed on my laptop - so use it at your own risk!
+Note that this is heavilly untested, I mean, until now it was only executed on my laptop - so use it at your own risk!
 
 ## usage
 
@@ -36,16 +36,18 @@ Note that replay uses docopt to generate helper messages and perform arg parsing
 Pretty much inspired by a couple of talks and articles on the subject:
 
 [Automating your development environment with Ansible](http://www.nickhammond.com/automating-development-environment-ansible/) by Nick Hammond
+
 [It's Not Just for Servers: Chefing Your Development Environment (The Pivotal Way)](http://www.youtube.com/watch?v=kfQy8UzBUvY&feature=plcp) at ChefConf 2012
 
 And some similar but much more pretty projects like:
 
 [Sprout](https://github.com/pivotal-sprout/sprout)
+
 [Boxen](http://boxen.github.com/)
 
 ## how does it work?
 
-Replay reads a yaml file in your home dir `~/.replay.yml` which contains a list of tasks to be played on the box much like:˙
+Replay reads a yaml file in your home dir `~/.replay.yml` which contains a list of tasks to be played on the box much like:
 ```
 # Box baseline
 ---
@@ -103,7 +105,7 @@ Run replay:
 $ ./replay all
 ```
 
-Again I've never actually tested the installation and therefore it might (probably will?) brake.
+Again I've never actually tested the installation and therefore it might (probably will?) break.
 
 ## what kind of things are implemented?
 
