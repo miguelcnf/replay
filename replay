@@ -2,12 +2,12 @@
 '''replay
 
 Usage:
-  replay all | hack
-  replay (-h | --help | --version)
+    replay all | hack
+    replay (-h | --help | --version)
 
 Options:
-  -h, --help  show this help message and exit
-  --version   prints program version and exit
+    -h, --help    show this help message and exit
+    --version     prints program version and exit
 '''
 
 import sys
@@ -19,20 +19,20 @@ from lib.replay import replay
 
 if __name__ == "__main__":
 
-  arguments = docopt(__doc__, version='replay 0.0.1')
-  hack = arguments['hack']
-  
-  try:
-    jinja_env = Environment(loader=PackageLoader('lib.mock'))
-    m = mock()
-    m.writeVarsFile(hack)
-    playbook_file = m.writePlaybook(jinja_env)
-    inventory_file = m.writeInventoryFile()
+    arguments = docopt(__doc__, version='replay 0.0.1')
+    hack = arguments['hack']
 
-    replay().run(playbook_file, inventory_file)
-  except Exception, e:
-    print 'replay failed - %s' % e
-    sys.exit(1)
+    try:
+        jinja_env = Environment(loader=PackageLoader('lib.mock'))
+        m = mock()
+        m.writeVarsFile(hack)
+        playbook_file = m.writePlaybook(jinja_env)
+        inventory_file = m.writeInventoryFile()
 
-  print 'replay success'
-  sys.exit(0)
+        replay().run(playbook_file, inventory_file)
+    except Exception, e:
+        print 'replay failed - %s' % e
+        sys.exit(1)
+
+    print 'replay success'
+    sys.exit(0)
