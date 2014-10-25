@@ -25,3 +25,12 @@
     - name: Symlink dotfiles
       file: path=~/{{ '{{ item }}' }} src=~/.dotfiles/{{ '{{ item }}' }} state=link
       with_items: tasks.dotfiles.list
+
+    - name: Install vim pathogen
+      shell: mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+    - name: Install pathogen plugins
+      git: repo=git@github.com:{{ '{{ item.repo }}' }}.git dest=~/.vim/bundle/{{ '{{ item.name }}'}} force=no
+      with_items: tasks.pathogen.plugins
+      when: tasks.pathogen is defined
+
